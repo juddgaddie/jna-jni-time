@@ -1,0 +1,6 @@
+-shared
+-Wl,-soname,libnativetime.so
+-o
+/home/gaddiej/workspace/mfidtime/build/libs/nativetime/shared/release/libnativetime.so
+/home/gaddiej/workspace/mfidtime/build/objs/nativetime/shared/release/nativetimeCpp/3zdeaw259oy1pa9krkysduapk/nativetime.o
+-m64

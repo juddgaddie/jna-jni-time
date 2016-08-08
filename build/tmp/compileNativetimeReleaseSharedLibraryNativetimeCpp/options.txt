@@ -1,0 +1,13 @@
+-x
+c++
+-c
+-fPIC
+-fPIC
+-O2
+-I
+/home/gaddiej/workspace/mfidtime/src/nativetime/headers
+-I
+/home/gaddiej/opt/jdk1.8.0_74/include
+-I
+/home/gaddiej/opt/jdk1.8.0_74/include/linux
+-m64

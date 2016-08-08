@@ -1,0 +1,4 @@
+See file:///home/gaddiej/workspace/mfidtime/build/tmp/createNativetimeDebugStaticLibrary/output.txt for all output for createNativetimeDebugStaticLibrary.
+archiving libnativetime.a successful.
+
+Finished createNativetimeDebugStaticLibrary, see full log file:///home/gaddiej/workspace/mfidtime/build/tmp/createNativetimeDebugStaticLibrary/output.txt.

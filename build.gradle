@@ -1,0 +1,94 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "gradle.plugin.me.champeau.gradle:jmh-gradle-plugin:0.3.0"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: "me.champeau.gradle.jmh"
+apply plugin: 'cpp'
+
+defaultTasks 'build'
+
+def jdkDir = System.getenv().JAVA_HOME
+
+model {
+    buildTypes {
+        debug
+        release
+    }
+    platforms {
+        x64 {
+            architecture "x86_64"
+        }
+    }
+    components {
+        nativetime(NativeLibrarySpec) {
+            binaries.all {
+                if (buildType == buildTypes.debug)
+                {
+                    cppCompiler.args("-fPIC", "-O2", "-g", "-pedantic", "-Wall", "-Wextra", "-Wcast-align", "-Wcast-qual", "-Wctor-dtor-privacy", "-Wdisabled-optimization", "-Wformat=2",
+                            "-Winit-self", "-Wlogical-op", "-Wmissing-declarations", "-Wmissing-include-dirs", "-Wnoexcept", /*"-Wold-style-cast",*/ "-Woverloaded-virtual", "-Wredundant-decls",
+                            "-Wshadow", /*"-Wsign-conversion",*/ "-Wsign-promo", "-Wstrict-null-sentinel", "-Wstrict-overflow=5", "-Wswitch-default", "-Wundef", "-Werror", "-Wno-unused")
+                }
+                else if (buildTypes.release)
+                {
+                    cppCompiler.args "-fPIC", "-O2"
+                }
+            }
+            sources {
+                cpp {
+                    exportedHeaders {
+                        srcDirs "src/nativetime/headers", "$jdkDir/include", "$jdkDir/include/linux"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+def nativeLibPath = "$rootDir/build/libs/nativetime/shared/release"
+jmh {
+    jmhVersion = '1.12'
+    jvmArgsAppend = "-Djava.library.path=${nativeLibPath}"
+    fork = 10
+    warmupIterations = 20
+    iterations = 20
+    forceGC = false //default is false
+    includeTests = false
+    timeUnit = 'us'
+    profilers = ['gc']
+    resultFormat = 'JSON'
+    /*Supported profilers:
+              cl: Classloader profiling via standard MBeans
+            comp: JIT compiler profiling via standard MBeans
+              gc: GC profiling via standard MBeans
+           hs_cl: HotSpot (tm) classloader profiling via implementation-specific MBeans
+         hs_comp: HotSpot (tm) JIT compiler profiling via implementation-specific MBeans
+           hs_gc: HotSpot (tm) memory manager (GC) profiling via implementation-specific MBeans
+           hs_rt: HotSpot (tm) runtime profiling via implementation-specific MBeans
+          hs_thr: HotSpot (tm) threading subsystem via implementation-specific MBeans
+           stack: Simple and naive Java stack profiler
+     */
+}
+
+tasks.jmh{
+    dependsOn ':nativetimeReleaseSharedLibrary'
+}
+
+dependencies {
+    compile 'org.openjdk.jmh:jmh-core:1.12'
+    compile 'net.java.dev.jna:jna:4.2.2'
+}
+

@@ -1,0 +1,11 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,net/gaddie/benchmark/GetCurrentTimeBenchmark.measureGetJNACurrentNanoTime
+inline,net/gaddie/benchmark/GetCurrentTimeBenchmark.measureGetJNADirectMappingCurrentNanoTime
+inline,net/gaddie/benchmark/GetCurrentTimeBenchmark.measureGetJNICurrentNanoTime
+inline,net/gaddie/benchmark/GetCurrentTimeBenchmark.measureGetJavaCurrentTime
+inline,net/gaddie/benchmark/GetCurrentTimeBenchmark.setup
+inline,org/openjdk/jmh/infra/Blackhole.clearSinks
