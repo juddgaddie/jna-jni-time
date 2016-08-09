@@ -6,6 +6,7 @@ Read the blog about this benchmark [here](http://wireddevelopment.blogspot.co.uk
 Linux, tested on Fedora 23 will NOT work on OS X
 
 ##Build
+[![Build Status](https://travis-ci.org/juddgaddie/jna-jni-time.svg?branch=master)](https://travis-ci.org/juddgaddie/jna-jni-time)
 ```
 ./gradlw build
 ```
