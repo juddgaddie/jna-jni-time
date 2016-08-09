@@ -1,4 +1,0 @@
-See file:///home/gaddiej/workspace/mfidtime/build/tmp/linkNativetimeReleaseSharedLibrary/output.txt for all output for linkNativetimeReleaseSharedLibrary.
-linking libnativetime.so successful.
-
-Finished linkNativetimeReleaseSharedLibrary, see full log file:///home/gaddiej/workspace/mfidtime/build/tmp/linkNativetimeReleaseSharedLibrary/output.txt.

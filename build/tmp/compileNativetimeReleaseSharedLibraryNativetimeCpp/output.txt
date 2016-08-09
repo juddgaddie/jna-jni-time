@@ -1,4 +1,0 @@
-See file:///home/gaddiej/workspace/mfidtime/build/tmp/compileNativetimeReleaseSharedLibraryNativetimeCpp/output.txt for all output for compileNativetimeReleaseSharedLibraryNativetimeCpp.
-compiling nativetime.c successful.
-
-Finished compileNativetimeReleaseSharedLibraryNativetimeCpp, see full log file:///home/gaddiej/workspace/mfidtime/build/tmp/compileNativetimeReleaseSharedLibraryNativetimeCpp/output.txt.
