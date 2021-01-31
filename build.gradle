@@ -61,7 +61,7 @@ model {
 def nativeLibPath = "$rootDir/build/libs/nativetime/shared/release"
 jmh {
     jmhVersion = '1.12'
-    jvmArgsAppend = ["-Djava.library.path=${nativeLibPath}"]
+    jvmArgsAppend = ["-Djava.library.path=${nativeLibPath}".toString()]
     fork = 10
     warmupIterations = 20
     iterations = 20
@@ -97,10 +97,12 @@ test {
 }
 
 dependencies {
-    implementation 'org.openjdk.jmh:jmh-core:1.26'
+    jmh 'org.openjdk.jmh:jmh-core:1.26'
+    jmh 'org.openjdk.jmh:jmh-generator-reflection:1.26'
+    jmh 'net.sf.jopt-simple:jopt-simple:4.6'
+    jmh 'org.apache.commons:commons-math3:3.2'
     implementation 'net.java.dev.jna:jna:4.2.2'
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
-    jmh 'net.java.dev.jna:jna:4.2.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.7.0"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.7.0"
 }
 
