@@ -1,13 +1,10 @@
 package net.gaddie.benchmark;
 
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import net.gaddie.mfidtime.Clock;
 import net.gaddie.mfidtime.jna.JnaClock;
 import net.gaddie.mfidtime.jna.JnaClockNativeMapping;
 import org.openjdk.jmh.annotations.*;
-
-import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 public class GetCurrentTimeBenchmark {

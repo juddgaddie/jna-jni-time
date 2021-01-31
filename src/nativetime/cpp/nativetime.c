@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <jni.h>
+#include <errno.h>
 #include "clock.h"
 
 
@@ -21,7 +22,9 @@ JNIEXPORT jlong JNICALL Java_net_gaddie_mfidtime_Clock_currentTimeNanos
 
       if (r != 0) {
               fprintf(stderr ,"ERROR: Failed, clock_gettime(CLOCK_REALTIME) returned %i exiting \n", r);
-              return (jlong)0;
+              fprintf(stderr, "Value of errno: %d\n ", errno);
+              perror("Error description: ");
+              exit(0);
       }
       return (jlong) nowNanos;
 }

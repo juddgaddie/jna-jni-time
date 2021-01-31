@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.8"
+        classpath "me.champeau.gradle:jmh-gradle-plugin:0.5.2"
     }
 }
 
@@ -20,7 +20,7 @@ apply plugin: 'cpp'
 
 defaultTasks 'build'
 
-def jdkDir = System.getenv().JAVA_HOME
+def jdkDir = System.getProperty('java.home')
 
 model {
     buildTypes {
@@ -61,7 +61,7 @@ model {
 def nativeLibPath = "$rootDir/build/libs/nativetime/shared/release"
 jmh {
     jmhVersion = '1.12'
-    jvmArgsAppend = "-Djava.library.path=${nativeLibPath}"
+    jvmArgsAppend = ["-Djava.library.path=${nativeLibPath}"]
     fork = 10
     warmupIterations = 20
     iterations = 20
@@ -87,8 +87,20 @@ tasks.jmh{
     dependsOn ':nativetimeReleaseSharedLibrary'
 }
 
+tasks.withType(Test) {
+    dependsOn ':nativetimeReleaseSharedLibrary'
+    systemProperty "java.library.path", nativeLibPath
+}
+
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
-    implementation 'org.openjdk.jmh:jmh-core:1.12'
+    implementation 'org.openjdk.jmh:jmh-core:1.26'
     implementation 'net.java.dev.jna:jna:4.2.2'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    jmh 'net.java.dev.jna:jna:4.2.2'
 }
 
