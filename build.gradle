@@ -88,7 +88,7 @@ tasks.jmh{
 }
 
 dependencies {
-    compile 'org.openjdk.jmh:jmh-core:1.12'
-    compile 'net.java.dev.jna:jna:4.2.2'
+    implementation 'org.openjdk.jmh:jmh-core:1.12'
+    implementation 'net.java.dev.jna:jna:4.2.2'
 }
 
