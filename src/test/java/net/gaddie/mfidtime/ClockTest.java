@@ -1,5 +1,6 @@
 package net.gaddie.mfidtime;
 
+import jdk.internal.misc.VM;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,4 +17,10 @@ class ClockTest {
         Assertions.assertTrue(nanoTimeInMillis > 1612121394824L);
     }
 
+    @Test
+    void shouldPrintCorrectNanoTimeForJava11() {
+        final long seconds =  TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis());
+        final long nanos = VM.getNanoTimeAdjustment(seconds);
+        System.out.println(TimeUnit.SECONDS.toNanos(seconds) + nanos);
+    }
 }

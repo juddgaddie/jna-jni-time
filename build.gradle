@@ -60,11 +60,11 @@ model {
 
 def nativeLibPath = "$rootDir/build/libs/nativetime/shared/release"
 jmh {
-    jmhVersion = '1.12'
-    jvmArgsAppend = ["-Djava.library.path=${nativeLibPath}".toString()]
-    fork = 10
-    warmupIterations = 20
-    iterations = 20
+    jmhVersion = '1.26'
+    jvmArgsAppend = ["-Djava.library.path=${nativeLibPath}".toString(), '--add-opens','java.base/jdk.internal.misc=ALL-UNNAMED']
+    fork = 2
+    warmupIterations = 2
+    iterations = 2
     forceGC = false //default is false
     includeTests = false
     timeUnit = 'us'
@@ -83,8 +83,16 @@ jmh {
      */
 }
 
-tasks.jmh{
+tasks.jmh {
     dependsOn ':nativetimeReleaseSharedLibrary'
+}
+
+compileJava {
+    options.compilerArgs += ["--add-opens", "java.base/jdk.internal.misc=ALL-UNNAMED"]
+}
+
+compileTestJava {
+    options.compilerArgs += ["--add-opens", "java.base/jdk.internal.misc=ALL-UNNAMED"]
 }
 
 tasks.withType(Test) {
@@ -94,6 +102,7 @@ tasks.withType(Test) {
 
 test {
     useJUnitPlatform()
+    jvmArgs += ["--add-opens", "java.base/jdk.internal.misc=ALL-UNNAMED"]
 }
 
 dependencies {
